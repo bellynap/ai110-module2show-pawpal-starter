@@ -72,4 +72,4 @@ Confidence level: ⭐⭐⭐⭐ (4/5)
 
 ## Demo
 
-<a href="/course_images/ai110/demo_screenshot2.png" target="_blank"><img src='/course_images/ai110/demo_screenshot.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
+<a href="/course_images/ai110/demo_screenshot2.png" target="_blank"><img src='/course_images/ai110/demo_screenshot2.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
