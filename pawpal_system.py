@@ -143,3 +143,85 @@ class Scheduler:
                     continue
                 filtered.append(task)
         return filtered
+
+
+import json
+from datetime import date
+
+def save_to_json(owner: Owner, filepath: str = "data.json") -> None:
+    """Save owner, pets, and tasks to a JSON file."""
+    data = {
+        "owner": {
+            "name": owner.name,
+            "email": owner.email
+        },
+        "pets": [
+            {
+                "name": pet.name,
+                "species": pet.species,
+                "date_of_birth": pet.date_of_birth.isoformat(),
+                "medical_notes": pet.medical_notes,
+                "tasks": [
+                    {
+                        "name": task.name,
+                        "task_type": task.task_type,
+                        "duration": task.duration,
+                        "frequency": task.frequency,
+                        "priority": task.priority,
+                        "scheduled_time": task.scheduled_time,
+                        "is_recurring": task.is_recurring,
+                        "completed": task.completed
+                    }
+                    for task in pet.get_tasks()
+                ]
+            }
+            for pet in owner.get_pets()
+        ]
+    }
+    with open(filepath, "w") as f:
+        json.dump(data, f, indent=2)
+
+
+def load_from_json(filepath: str = "data.json"):
+    """Load owner, pets, and tasks from a JSON file."""
+    try:
+        with open(filepath, "r") as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        return None, [], []
+
+    owner = Owner(name=data["owner"]["name"], email=data["owner"]["email"])
+    pets_list = []
+    tasks_list = []
+
+    for pet_data in data["pets"]:
+        pet = Pet(
+            name=pet_data["name"],
+            species=pet_data["species"],
+            date_of_birth=date.fromisoformat(pet_data["date_of_birth"]),
+            medical_notes=pet_data["medical_notes"]
+        )
+        for task_data in pet_data["tasks"]:
+            task = Task(
+                name=task_data["name"],
+                task_type=task_data["task_type"],
+                duration=task_data["duration"],
+                frequency=task_data["frequency"],
+                priority=task_data["priority"],
+                scheduled_time=task_data["scheduled_time"],
+                is_recurring=task_data["is_recurring"],
+                completed=task_data["completed"]
+            )
+            pet.add_task(task)
+            tasks_list.append({
+                "pet": pet.name,
+                "task": task.name,
+                "time": task.scheduled_time,
+                "duration": task.duration,
+                "frequency": task.frequency,
+                "priority": task.priority
+            })
+        owner.add_pet(pet)
+        pets_list.append(pet.name)
+
+    return owner, pets_list, tasks_list

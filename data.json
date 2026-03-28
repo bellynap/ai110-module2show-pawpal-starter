@@ -1,0 +1,64 @@
+{
+  "owner": {
+    "name": "Jenny",
+    "email": "jenny@email.com"
+  },
+  "pets": [
+    {
+      "name": "Jojo",
+      "species": "dog",
+      "date_of_birth": "2020-01-14",
+      "medical_notes": "",
+      "tasks": [
+        {
+          "name": "Walk (1)",
+          "task_type": "walk",
+          "duration": 20,
+          "frequency": 1,
+          "priority": 1,
+          "scheduled_time": "08:00",
+          "is_recurring": true,
+          "completed": false
+        },
+        {
+          "name": "Walk (2)",
+          "task_type": "walk",
+          "duration": 20,
+          "frequency": 1,
+          "priority": 1,
+          "scheduled_time": "20:00",
+          "is_recurring": true,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "name": "Mimi",
+      "species": "cat",
+      "date_of_birth": "2020-01-14",
+      "medical_notes": "",
+      "tasks": [
+        {
+          "name": "Feeding (1)",
+          "task_type": "feeding",
+          "duration": 20,
+          "frequency": 1,
+          "priority": 1,
+          "scheduled_time": "09:00",
+          "is_recurring": true,
+          "completed": false
+        },
+        {
+          "name": "Feeding (2)",
+          "task_type": "feeding",
+          "duration": 20,
+          "frequency": 1,
+          "priority": 1,
+          "scheduled_time": "21:00",
+          "is_recurring": true,
+          "completed": false
+        }
+      ]
+    }
+  ]
+}
