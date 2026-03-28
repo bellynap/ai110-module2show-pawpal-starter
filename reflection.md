@@ -94,6 +94,20 @@ The most helpful prompts were ones where I described a specific
 problem, like how the Scheduler should retrieve tasks from the 
 Owner's pets, and got targeted solutions in return.
 
+
+The most effective AI features for building the scheduler were:
+- Using AI to brainstorm the initial class design and catch edge 
+  cases like date_of_birth vs age and owner time constraints
+- Generating the Mermaid UML diagram from our design discussion
+- Getting targeted help with specific problems like how Scheduler 
+  should retrieve tasks across multiple pets
+- UI improvements like the tabbed layout and color coding were 
+  suggested and implemented collaboratively
+
+Having separate conversations for each phase helped keep the context 
+focused — design questions in Phase 1, implementation in Phase 2, 
+and so on.
+
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.

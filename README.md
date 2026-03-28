@@ -63,7 +63,12 @@ Confidence level: ⭐⭐⭐⭐ (4/5)
 4. Generate the daily schedule
 5. Check off tasks as you complete them
 
+## Optional Extensions
+
+- ✅ Challenge 2: Data Persistence (auto-saves to data.json)
+- ✅ Challenge 3: Priority-Based Color Coding (🔴🟡🟢)
+- ✅ Challenge 4: Professional UI with emojis, tabs, and checkboxes
 
 ## Demo
 
-<a href="/course_images/ai110/demo_screenshot.png" target="_blank"><img src='/course_images/ai110/demo_screenshot.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
+<a href="/course_images/ai110/demo_screenshot2.png" target="_blank"><img src='/course_images/ai110/demo_screenshot.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
