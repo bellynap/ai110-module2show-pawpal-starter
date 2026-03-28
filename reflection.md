@@ -5,12 +5,27 @@
 **a. Initial design**
 
 - Briefly describe your initial UML design.
+A user should be able to 1) add thier pet's basic info, 2) create and manage care tasks with priorities, and 3) generate a daily care plan based on those tasks. So I would have four classes.
+
 - What classes did you include, and what responsibilities did you assign to each?
+
+Thinking through it, I initally decided on 
+Owner : Represesnts the app user. Holds : name, email, pets[] 
+Can also add and retrive pets.
+
+Pet: Represents the animal being cared for. Holds: name, species, age
+Can add and retrieve tasks.
+
+Task: Represents a single care activity like a walk, feeding, or medication. Holds: name, duration, frequency, priority, task_type
+
+Scheduler: Is the brain of the app. Takes the owner's avaialable time and organizes tasks by priority, detects conflicts, and generates a daily care plan : tasks, owner, time_available
 
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
+
+Yes, as I thought through different scenarios and edge cases, I thought it would be good to add a pet DOB so the program automatically updates the pet's age. The pet might also have temporary medical issues so a medical notes section which also made me think, what if the pet has to take medication but only for a week. This led me to add a scheduled_time and and is_recurring into the Task class. 
 
 ---
 
