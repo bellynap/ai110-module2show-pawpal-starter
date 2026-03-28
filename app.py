@@ -303,7 +303,7 @@ with tab4:
                             col_check, col_info = st.columns([1, 9])
                             with col_check:
                                 done = st.checkbox("", value=task.completed,
-                                    key=f"cb_{pet.name}_{task.name}_{task.scheduled_time}")
+                                    key=f"cb_{pet.name}_{task.name}_{task.scheduled_time}_{id(task)}")
                             with col_info:
                                 strike = "~~" if done else ""
                                 st.markdown(
