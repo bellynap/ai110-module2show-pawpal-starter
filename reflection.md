@@ -36,11 +36,44 @@ Yes, as I thought through different scenarios and edge cases, I thought it would
 - What constraints does your scheduler consider (for example: time, priority, preferences)?
 - How did you decide which constraints mattered most?
 
+
+My scheduler considers the following constraints:
+- Time available: the owner sets how many minutes they have in a day.
+  Tasks are only added to the schedule if they fit within that time.
+- Priority: tasks are sorted by priority number (1 = most important)
+  so critical tasks like medication are always scheduled first.
+- Duration and frequency: total time per task is calculated as 
+  duration x frequency, so a task done 3 times a day costs more 
+  time than one done once.
+
+I decided time and priority mattered most because a pet owner with 
+limited time needs to know which tasks absolutely cannot be skipped.
+
+
 **b. Tradeoffs**
 
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
 
+
+One tradeoff my scheduler makes is that it drops lower-priority tasks 
+completely if the owner doesn't have enough time, rather than 
+shortening them to fit.
+
+For example, a grooming session might get skipped entirely even if 
+the owner had 10 minutes left but the task needed 20 minutes. A 
+shorter grooming session would still be better than none at all.
+
+This tradeoff is reasonable because it keeps the scheduling logic 
+simple and predictable — the owner always knows exactly how long 
+each task will take. However, a future improvement could be to allow 
+"flexible" tasks like walks and grooming to be shortened when time 
+is tight, while keeping "fixed" tasks like medication and feeding 
+at their full duration.
+
+Interestingly, the scheduler does not stop after skipping a task — 
+it keeps checking remaining tasks, so a smaller lower-priority task 
+could still be scheduled after a larger one gets skipped.
 ---
 
 ## 3. AI Collaboration
@@ -50,10 +83,37 @@ Yes, as I thought through different scenarios and edge cases, I thought it would
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
 - What kinds of prompts or questions were most helpful?
 
+I used AI (Claude) throughout this project for:
+- Brainstorming the initial class design and catching edge cases 
+  I hadn't considered, like using date_of_birth instead of age
+- Generating the Mermaid.js UML diagram from our design discussion
+- Writing the skeleton and full implementation code for all classes
+- Building and connecting the Streamlit UI to the backend
+
+The most helpful prompts were ones where I described a specific 
+problem, like how the Scheduler should retrieve tasks from the 
+Owner's pets, and got targeted solutions in return.
+
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.
 - How did you evaluate or verify what the AI suggested?
+
+**b. Judgment and verification**
+
+During the design phase, AI suggested using `age` as an attribute 
+for the Pet class. I questioned this because a hardcoded age would 
+need to be manually updated every year. Instead I suggested using 
+`date_of_birth` so the age could be calculated automatically using 
+`get_age()`.
+
+I also pushed back on the tradeoff explanation when AI used 
+medication as an example of a task that might get skipped. I 
+recognized that medication is priority 1 and would never be dropped 
+by the scheduler, so the example was logically flawed. I asked AI 
+to verify the actual code before writing the reflection, which 
+confirmed the real tradeoff involved lower-priority tasks like 
+grooming instead.
 
 ---
 
