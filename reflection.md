@@ -124,10 +124,29 @@ grooming instead.
 - What behaviors did you test?
 - Why were these tests important?
 
+
+I tested two core behaviors:
+- Task completion: verified that calling mark_complete() actually 
+  changes the task's completed status from False to True.
+- Task addition: verified that adding a task to a pet correctly 
+  increases that pet's task count.
+
+These tests were important because they confirm the most fundamental 
+actions in the app — if marking tasks complete or adding them to pets 
+doesn't work, nothing else in the scheduler will work correctly.
+
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
 - What edge cases would you test next if you had more time?
+
+
+I am fairly confident the scheduler works for standard cases. 
+However, edge cases I would test next include:
+- What happens if an owner has no pets or no tasks?
+- What if two tasks have the same priority?
+- What if the owner's available time is 0?
+- What if a task duration is longer than the total time available?
 
 ---
 
@@ -137,10 +156,30 @@ grooming instead.
 
 - What part of this project are you most satisfied with?
 
+
+I am most satisfied with the conflict detection logic. It correctly 
+identifies when two tasks for the same pet overlap in time and 
+clearly communicates which tasks are conflicting and at what time.
+
 **b. What you would improve**
 
 - If you had another iteration, what would you improve or redesign?
 
+
+I would improve the conflict detection to flag cross-pet scheduling 
+clashes, since the owner still only has two hands regardless of 
+which pet needs attention. I would also add the ability to shorten 
+flexible tasks like walks instead of skipping them entirely.
+
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+
+
+The most important thing I learned is that AI is a great thinking 
+partner but not a replacement for critical thinking. Several times 
+during this project I caught logical flaws in AI suggestions — like 
+using medication as an example of a task that might get skipped, 
+when medication is actually the highest priority. Verifying AI 
+suggestions against the actual code before accepting them was 
+essential.
