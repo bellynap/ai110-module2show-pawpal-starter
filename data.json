@@ -28,6 +28,26 @@
           "priority": 1,
           "scheduled_time": "20:00",
           "is_recurring": true,
+          "completed": true
+        },
+        {
+          "name": "Walk (2)",
+          "task_type": "walk",
+          "duration": 20,
+          "frequency": 1,
+          "priority": 1,
+          "scheduled_time": "20:00",
+          "is_recurring": true,
+          "completed": false
+        },
+        {
+          "name": "Grooming",
+          "task_type": "grooming",
+          "duration": 20,
+          "frequency": 1,
+          "priority": 3,
+          "scheduled_time": "19:00",
+          "is_recurring": true,
           "completed": false
         }
       ]
@@ -55,6 +75,16 @@
           "frequency": 1,
           "priority": 1,
           "scheduled_time": "21:00",
+          "is_recurring": true,
+          "completed": false
+        },
+        {
+          "name": "Grooming",
+          "task_type": "grooming",
+          "duration": 20,
+          "frequency": 1,
+          "priority": 2,
+          "scheduled_time": "10:00",
           "is_recurring": true,
           "completed": false
         }

@@ -68,6 +68,7 @@ Confidence level: ⭐⭐⭐⭐ (4/5)
 - ✅ Challenge 2: Data Persistence (auto-saves to data.json)
 - ✅ Challenge 3: Priority-Based Color Coding (🔴🟡🟢)
 - ✅ Challenge 4: Professional UI with emojis, tabs, and checkboxes
+- ✅ Challenge 1: Next Available Slot algorithm — automatically suggests alternative times when scheduling conflicts are detected
 
 ## Demo
 

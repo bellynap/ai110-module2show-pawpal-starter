@@ -144,6 +144,27 @@ class Scheduler:
                 filtered.append(task)
         return filtered
 
+    def find_next_available_slot(self, task: Task) -> str:
+        """Find the next available time slot if a task has a conflict."""
+        # Get all currently scheduled times
+        scheduled_times = [
+            t.scheduled_time 
+            for t in self.owner.get_all_tasks() 
+            if t != task
+        ]
+        
+        # Generate time slots in 30 min increments
+        from datetime import datetime, timedelta
+        base = datetime.strptime(task.scheduled_time, "%H:%M")
+        
+        for i in range(1, 24):  # check up to 24 slots ahead
+            candidate = base + timedelta(minutes=30 * i)
+            candidate_str = candidate.strftime("%H:%M")
+            if candidate_str not in scheduled_times:
+                return candidate_str
+        
+        return task.scheduled_time  # fallback to original if no slot found
+
 
 import json
 from datetime import date

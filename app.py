@@ -257,6 +257,20 @@ with tab4:
                 st.markdown("### ⚠️ Scheduling Conflicts")
                 for conflict in conflicts:
                     st.warning(conflict)
+                
+                st.markdown("### 🔄 Suggested Resolutions")
+                for pet in st.session_state.owner.get_pets():
+                    seen_times = {}
+                    for task in pet.get_tasks():
+                        if task.scheduled_time in seen_times:
+                            next_slot = scheduler.find_next_available_slot(task)
+                            st.info(
+                                f"💡 **{task.name}** for {pet.name} conflicts at "
+                                f"{task.scheduled_time}. "
+                                f"Suggested next available slot: **{next_slot}**"
+                            )
+                        else:
+                            seen_times[task.scheduled_time] = task.name
             else:
                 st.success("✅ No scheduling conflicts found!")
 
