@@ -29,6 +29,17 @@ walk = Task(
     scheduled_time="08:00"
 )
 
+# Add a conflicting task to Buddy to test conflict detection
+walk2 = Task(
+    name="Evening Medication",
+    task_type="medication",
+    duration=5,
+    frequency=1,
+    priority=1,
+    scheduled_time="08:00"  # same time as Morning Walk
+)
+dog.add_task(walk2)
+
 feeding = Task(
     name="Feeding",
     task_type="feeding",
@@ -90,3 +101,37 @@ else:
 
 print("\n🐶 Buddy's Age:", dog.get_age(), "years")
 print("🐱 Whiskers' Age:", cat.get_age(), "years")
+
+# ── Test Sorting by Time ──────────────────────────────
+print("\n⏰ Tasks Sorted by Time")
+print("=" * 35)
+sorted_tasks = scheduler.sort_by_time()
+for task in sorted_tasks:
+    print(f"{task.scheduled_time} | {task.name} | Priority {task.priority}")
+
+# ── Test Filtering ────────────────────────────────────
+print("\n🔍 Filtering: Incomplete Tasks Only")
+print("=" * 35)
+incomplete = scheduler.filter_tasks(completed=False)
+for task in incomplete:
+    print(f"{task.name} | Complete: {task.completed}")
+
+print("\n🔍 Filtering: Buddy's Tasks Only")
+print("=" * 35)
+buddy_tasks = scheduler.filter_tasks(pet_name="Buddy")
+for task in buddy_tasks:
+    print(f"{task.name} | {task.scheduled_time}")
+
+# ── Test Recurring Tasks ──────────────────────────────
+print("\n🔄 Recurring Task Test")
+print("=" * 35)
+walk.mark_complete()
+print(f"Morning Walk completed: {walk.is_complete()}")
+
+next_walk = walk.next_occurrence()
+if next_walk:
+    print(f"Next occurrence created: {next_walk.name}")
+    print(f"Scheduled for: {next_walk.scheduled_time}")
+    print(f"Completed: {next_walk.completed}")
+else:
+    print("No next occurrence (task is not recurring)")    

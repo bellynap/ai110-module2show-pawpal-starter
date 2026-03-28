@@ -22,6 +22,21 @@ class Task:
         """Mark the task as completed."""
         self.completed = True
 
+    def next_occurrence(self) -> "Task":
+        """Create a new instance of this task for the next occurrence."""
+        if not self.is_recurring:
+            return None
+        return Task(
+            name=self.name,
+            task_type=self.task_type,
+            duration=self.duration,
+            frequency=self.frequency,
+            priority=self.priority,
+            scheduled_time=self.scheduled_time,  # keep original time
+            is_recurring=self.is_recurring,
+            completed=False
+        )
+
 
 # ── Pet ───────────────────────────────────────────────
 @dataclass
@@ -84,18 +99,19 @@ class Scheduler:
         return sorted(all_tasks, key=lambda t: t.priority)
 
     def check_conflicts(self) -> List[str]:
-        """Detect tasks scheduled at the same time."""
+        """Detect tasks scheduled at the same time, grouped by pet."""
         conflicts = []
-        seen_times = {}
-        for task in self.owner.get_all_tasks():
-            if task.scheduled_time in seen_times:
-                conflicts.append(
-                    f"Conflict: '{task.name}' and "
-                    f"'{seen_times[task.scheduled_time]}' "
-                    f"are both scheduled at {task.scheduled_time}"
-                )
-            else:
-                seen_times[task.scheduled_time] = task.name
+        for pet in self.owner.get_pets():
+            seen_times = {}
+            for task in pet.get_tasks():
+                if task.scheduled_time in seen_times:
+                    conflicts.append(
+                        f"Conflict for {pet.name}: '{task.name}' and "
+                        f"'{seen_times[task.scheduled_time]}' "
+                        f"are both scheduled at {task.scheduled_time}"
+                    )
+                else:
+                    seen_times[task.scheduled_time] = task.name
         return conflicts
 
     def generate_schedule(self) -> List[Task]:
@@ -109,3 +125,21 @@ class Scheduler:
                 schedule.append(task)
                 time_used += total_time
         return schedule
+
+    def sort_by_time(self) -> List[Task]:
+        """Sort all tasks by scheduled time (HH:MM format)."""
+        all_tasks = self.owner.get_all_tasks()
+        return sorted(all_tasks, key=lambda t: t.scheduled_time)
+
+    def filter_tasks(self, pet_name: str = None, 
+                    completed: bool = None) -> List[Task]:
+        """Filter tasks by pet name and/or completion status."""
+        filtered = []
+        for pet in self.owner.get_pets():
+            for task in pet.get_tasks():
+                if pet_name and pet.name != pet_name:
+                    continue
+                if completed is not None and task.completed != completed:
+                    continue
+                filtered.append(task)
+        return filtered
